@@ -25,7 +25,7 @@ const url = `https://ghibliapi.herokuapp.com/films`;
             //buttonをクリックしたあとの処理
             button.addEventListener("click",function(){
                 ul.innerHTML="";//ulの初期化(他の作品をクリックしたときに前回見たやつとかぶらないようにするため)
-                let mnumber = movie.ariaValueMax;//optionのvalueの取得
+                let mnumber = movie.value;//optionのvalueの取得
                 let character = ziburi[mnumber].people;
                 let imgcode = ziburi[mnumber].image
                 image.setAttribute("src",imgcode)
@@ -40,8 +40,15 @@ const url = `https://ghibliapi.herokuapp.com/films`;
                 })
                 .then(function(namelist){//liの作成名前の追加＆ulにliを追加する
                     let name = namelist.name;
+                    let gender = namelist.gender;
+                    console.log(gender)
                     let li = document.createElement("li");
                     li.innerText=name;
+                    if(gender=="Female"){
+                        li.setAttribute("style","color:red")   
+                    }else if(gender=="Male"){
+                        li.setAttribute("style","color:blue")
+                    }
                     ul.appendChild(li);
                 })
             }
